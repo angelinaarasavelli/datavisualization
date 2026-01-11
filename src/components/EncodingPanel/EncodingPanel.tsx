@@ -103,11 +103,11 @@ export function EncodingPanel() {
             Map data to visual properties
           </p>
         </div>
-        {hasEncodings && (
-          <button
+        <button
             onClick={clearAll}
             onMouseEnter={() => setHoveredClear(true)}
             onMouseLeave={() => setHoveredClear(false)}
+            disabled={!hasEncodings}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -115,15 +115,16 @@ export function EncodingPanel() {
               padding: '6px 10px',
               fontSize: '11px',
               fontWeight: 500,
-              backgroundColor: hoveredClear
+              backgroundColor: hoveredClear && hasEncodings
                 ? 'rgba(239, 68, 68, 0.15)'
                 : 'rgba(239, 68, 68, 0.08)',
               color: '#ef4444',
               border: '1px solid rgba(239, 68, 68, 0.2)',
               borderRadius: '6px',
-              cursor: 'pointer',
+              cursor: hasEncodings ? 'pointer' : 'not-allowed',
               transition: 'all 0.2s ease',
               letterSpacing: '0.02em',
+              opacity: hasEncodings ? 1 : 0.4,
             }}
           >
             <svg
@@ -141,7 +142,6 @@ export function EncodingPanel() {
             </svg>
             Clear
           </button>
-        )}
       </div>
 
       {/* Sections */}
